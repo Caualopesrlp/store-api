@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterRequest extends FormRequest
+class StoreProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,8 +15,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:6'],
+            'description' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'stock' => ['required', 'integer', 'min:0'],
         ];
     }
 
@@ -24,9 +25,8 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name.required' => 'Nome é obrigatório',
-            'email.required' => 'Email é obrigatório',
-            'email.unique' => 'Este email já está em uso',
-            'password.required' => 'Senha é obrigatória',
+            'price.required' => 'Preço é obrigatório',
+            'stock.required' => 'Estoque é obrigatório',
         ];
     }
 }
