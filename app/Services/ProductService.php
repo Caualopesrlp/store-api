@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Repositories\ProductRepository;
+use Illuminate\Support\Facades\Auth;
 
 class ProductService
 {
@@ -23,11 +24,22 @@ class ProductService
 
     public function update(Product $product, array $data): Product
     {
+        $this->ensureOwnership($product);
+
         return $this->repository->update($product, $data);
     }
 
     public function delete(Product $product): bool
     {
+        $this->ensureOwnership($product);
+
         return $this->repository->delete($product);
+    }
+
+    private function ensureOwnership(Product $product): void
+    {
+        if ($product->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }
