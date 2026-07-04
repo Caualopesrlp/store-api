@@ -1,0 +1,26 @@
+info:
+  name: Atualizar Produtos
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: http://127.0.0.1:8000/api/products/6
+  body:
+    type: json
+    data: |-
+      {
+        "name": "atualizado",
+        "description": "Modelo atualizado profissional",
+        "price": 250,
+        "stock": 5
+      }
+  auth:
+    type: bearer
+    token: GJueLPOya36viZv5Fw12AgEHjvyNc5ts3bkiOoQCedfef8f9
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

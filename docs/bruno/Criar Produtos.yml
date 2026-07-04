@@ -1,0 +1,29 @@
+info:
+  name: Criar Produtos
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://127.0.0.1:8000/api/products
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Saxofone Alto YAS62",
+        "description": "Saxofone da Yamaha",
+        "price": 150,
+        "stock": 10
+      }
+  auth:
+    type: bearer
+    token: GJueLPOya36viZv5Fw12AgEHjvyNc5ts3bkiOoQCedfef8f9
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
