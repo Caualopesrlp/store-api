@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\AuthService;
 use Illuminate\Http\Request;
 
@@ -12,39 +14,28 @@ class AuthController extends Controller
         protected AuthService $authService
     ) {}
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-        ]);
-
-        $result = $this->authService->register($data);
+        $result = $this->authService->register($request->validated());
 
         return response()->json([
-            'message' => 'Usuario criado com sucesso!',
+            'message' => 'User created successfully',
             'data' => $result
         ]);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $data = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $result = $this->authService->login($data);
+        $result = $this->authService->login($request->validated());
 
         if (!$result) {
             return response()->json([
-                'message' => 'Credenciais invalidas!'
+                'message' => 'Invalid credentials'
             ], 401);
         }
 
         return response()->json([
-            'message' => 'Login realizado com sucesso!',
+            'message' => 'Login successful',
             'data' => $result
         ]);
     }
@@ -54,7 +45,7 @@ class AuthController extends Controller
         $this->authService->logout($request->user());
 
         return response()->json([
-            'message' => 'Logou realizado com sucesso!'
+            'message' => 'Logged out successfully'
         ]);
     }
 }
