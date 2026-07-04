@@ -9,10 +9,10 @@ Projeto focado em autenticação, CRUD e controle de ownership (cada usuário po
 ## 📷 Demonstração
 
 ### Autenticação
-[INSERIR PRINT AQUI]
+<img width="1110" height="674" alt="Screenshot_1" src="https://github.com/user-attachments/assets/e8f94069-96a0-4ce9-9e96-81a1e7218697" />
 
 ### Criação de produto
-[INSERIR PRINT AQUI]
+<img width="1102" height="591" alt="Screenshot_2" src="https://github.com/user-attachments/assets/272ba2f0-cc89-4298-aec8-19c0aa78f917" />
 
 ---
 
