@@ -35,6 +35,16 @@ class ProductController extends Controller
         ]);
     }
 
+    public function update(StoreProductRequest $request, Product $product)
+    {
+        $updated = $this->service->update($product, $request->validated());
+
+        return response()->json([
+            'message' => 'Produto atualizado com sucesso',
+            'data' => $updated
+        ]);
+    }
+
     public function destroy(Product $product)
     {
         $this->service->delete($product);
