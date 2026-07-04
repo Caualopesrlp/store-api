@@ -16,7 +16,6 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         return response()->json([
-            'message' => 'Products retrieved successfully',
             'data' => ProductResource::collection(
                 $this->service->listByUser($request->user()->id)
             )
@@ -31,7 +30,7 @@ class ProductController extends Controller
         );
 
         return response()->json([
-            'message' => 'Product created successfully',
+            'message' => 'Produto criado com sucesso',
             'data' => new ProductResource($product)
         ]);
     }
@@ -41,7 +40,7 @@ class ProductController extends Controller
         $this->service->delete($product);
 
         return response()->json([
-            'message' => 'Product deleted successfully'
+            'message' => 'Produto deletado com sucesso'
         ]);
     }
 }
