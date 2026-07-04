@@ -16,7 +16,7 @@ class ProductRepository
         return Product::find($id);
     }
 
-    public function create(array $data, int $userId): Product
+    public function create(array $data, int $userId)
     {
         return Product::create([
             ...$data,

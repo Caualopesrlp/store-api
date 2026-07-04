@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\StoreProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function __construct(
-        protected ProductService $service
-    ) {}
+    public function __construct(protected ProductService $service) {}
 
     public function index(Request $request)
     {
@@ -20,16 +19,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer|min:0',
-        ]);
-
-        $product = $this->service->create($data, $request->user()->id);
+        $product = $this->service->create(
+            $request->validated(),
+            $request->user()->id
+        );
 
         return response()->json([
             'message' => 'Product created',
